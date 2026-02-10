@@ -1,7 +1,7 @@
 :root {
   --primary-color: #666666;
-  --accent-color: #001F3F;
-  --text-color: #fefefe;
+  --accent-color: #F28D35;
+  --text-color: #F28D35;
   --font-title: 'Playfair Display', serif;
   --font-body: 'Montserrat', sans-serif;
 }
@@ -308,6 +308,7 @@ section {
   font-size: 14px;
   color: #fefefe;
 }
+
 
 
 

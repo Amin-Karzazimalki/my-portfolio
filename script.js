@@ -3,6 +3,30 @@ function toggleMenu() {
   nav.classList.toggle('show');
 }
 
+
+
+const cursor = document.getElementById('custom-cursor');
+let mouseX = 0, mouseY = 0;
+let cursorX = 0, cursorY = 0;
+const lag = 0.1; // Facteur de lag (plus petit = plus de lag, teste 0.05-0.2)
+
+document.addEventListener('mousemove', (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+});
+
+function animateCursor() {
+  cursorX += (mouseX - cursorX) * lag;
+  cursorY += (mouseY - cursorY) * lag;
+  cursor.style.transform = `translate(${cursorX - 5}px, ${cursorY - 5}px)`; // Centre le cercle
+  requestAnimationFrame(animateCursor);
+}
+
+animateCursor();
+
+
+
+
 const sections = document.querySelectorAll("section");
 const navLinks = document.querySelectorAll("nav a");
 
@@ -32,6 +56,7 @@ function getRandomColor() {
   }
   return color;
 }
+
 
 
 

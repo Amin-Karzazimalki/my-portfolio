@@ -13,19 +13,44 @@
 }
 
 
+
 #custom-cursor {
   position: fixed;
   top: 0;
   left: 0;
-  width: 10px; /* Taille discrète */
-  height: 10px;
-  border-radius: 50%; /* Cercle */
-  background-color: #F28D35 ; /* orange par défaut */
-  pointer-events: none; /* Ne bloque pas les clics */
-  z-index: 9999; /* Au-dessus de tout */
-  transition: transform 0.1s ease-out, width 0.2s ease-out, height 0.2s ease-out, background-color 0.2s ease-out;
-  mix-blend-mode: difference; /* Optionnel: inverse la couleur sur fond clair/sombre pour un effet organique */
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #F28D35;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.12s ease-out, width 0.25s ease-out, height 0.25s ease-out;
+  mix-blend-mode: difference; /* ou exclusion si tu préfères moins contrasté */
+  box-shadow: 0 0 12px rgba(242, 141, 53, 0.4);
 }
+
+/* Classe pour les éléments du trail */
+.cursor-trail {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #F28D35;
+  pointer-events: none;
+  z-index: 9998; /* juste en dessous du curseur principal */
+  opacity: 0;
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+  box-shadow: 0 0 10px rgba(242, 141, 53, 0.3);
+}
+
+/* Variantes pour plus de profondeur (optionnel) */
+.cursor-trail:nth-child(2) { width: 9px; height: 9px; }
+.cursor-trail:nth-child(3) { width: 8px; height: 8px; opacity: 0.35; }
+.cursor-trail:nth-child(4) { width: 7px; height: 7px; opacity: 0.25; }
+.cursor-trail:nth-child(5) { width: 6px; height: 6px; opacity: 0.15; }
+
+
+
 
 /* Pour mode sombre/clair (utilise une class sur body, ex: .dark-mode) */
 .dark-mode #custom-cursor {
@@ -332,6 +357,7 @@ section {
   font-size: 14px;
   color: #fefefe;
 }
+
 
 
 

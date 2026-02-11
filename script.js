@@ -5,24 +5,58 @@ function toggleMenu() {
 
 
 
+// --- Variables ---
 const cursor = document.getElementById('custom-cursor');
-let mouseX = 0, mouseY = 0;
-let cursorX = 0, cursorY = 0;
-const lag = 0.1; // Facteur de lag (plus petit = plus de lag, teste 0.05-0.2)
+let mouseX = 0;
+let mouseY = 0;
+let cursorX = 0;
+let cursorY = 0;
 
+const lag = 0.12;              // lag du curseur principal (ease-out naturel)
+const trailCount = 6;          // nombre de traînées (4–8 est subtil)
+const trailDelay = 40;         // délai entre chaque traînée (en ms, plus = trail plus long)
+const trails = [];             // tableau pour stocker les éléments trail
+
+// --- Création des trails une seule fois ---
+for (let i = 0; i < trailCount; i++) {
+  const trail = document.createElement('div');
+  trail.classList.add('cursor-trail');
+  document.body.appendChild(trail);
+  trails.push(trail);
+}
+
+// --- Suivi de la souris ---
 document.addEventListener('mousemove', (e) => {
   mouseX = e.clientX;
   mouseY = e.clientY;
 });
 
-function animateCursor() {
+// --- Animation loop ---
+function animate() {
+  // Curseur principal (avec lag)
   cursorX += (mouseX - cursorX) * lag;
   cursorY += (mouseY - cursorY) * lag;
-  cursor.style.transform = `translate(${cursorX - 5}px, ${cursorY - 5}px)`; // Centre le cercle
-  requestAnimationFrame(animateCursor);
+  cursor.style.transform = `translate(${cursorX - 6}px, ${cursorY - 6}px)`;
+
+  // Trails : décalage progressif + fade
+  trails.forEach((trail, index) => {
+    const delayFactor = (index + 1) * trailDelay;
+    // On simule un décalage temporel en utilisant une interpolation plus lente
+    const delayedX = mouseX + (cursorX - mouseX) * (index * 0.15);
+    const delayedY = mouseY + (cursorY - mouseY) * (index * 0.15);
+
+    trail.style.transform = `translate(${delayedX - (trail.offsetWidth / 2)}px, ${delayedY - (trail.offsetHeight / 2)}px)`;
+    
+    // Opacité décroissante + fade out naturel
+    trail.style.opacity = (trailCount - index) / (trailCount * 2.5); // ex: 0.4 → 0.05
+  });
+
+  requestAnimationFrame(animate);
 }
 
-animateCursor();
+animate();
+
+
 
 
 
@@ -56,6 +90,7 @@ function getRandomColor() {
   }
   return color;
 }
+
 
 
 

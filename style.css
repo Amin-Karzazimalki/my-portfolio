@@ -12,7 +12,27 @@
   box-sizing: border-box;
 }
 
+
+#custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 10px; /* Taille discrète */
+  height: 10px;
+  border-radius: 50%; /* Cercle */
+  background-color: #000; /* Noir par défaut */
+  pointer-events: none; /* Ne bloque pas les clics */
+  z-index: 9999; /* Au-dessus de tout */
+  transition: transform 0.1s ease-out, width 0.2s ease-out, height 0.2s ease-out, background-color 0.2s ease-out;
+  mix-blend-mode: difference; /* Optionnel: inverse la couleur sur fond clair/sombre pour un effet organique */
+}
+
+/* Pour mode sombre/clair (utilise une class sur body, ex: .dark-mode) */
+.dark-mode #custom-cursor {
+  background-color: #fff; /* Blanc en mode sombre */
+}
 html, body {
+   cursor: none; /* Cache le curseur standard */
   height: 100%;
   scroll-behavior: smooth;
   background: linear-gradient(180deg, #ffffff 0%, #f0f0f0 100%);
@@ -312,6 +332,7 @@ section {
   font-size: 14px;
   color: #fefefe;
 }
+
 
 
 

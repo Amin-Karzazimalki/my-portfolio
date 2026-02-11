@@ -87,11 +87,14 @@ section {
   text-align: center;
 }
 
-#hero, #about, #projects, #skills, #contact {
+#hero,, #projects, #skills, #contact {
       background-color: #1a1a1a;
       color: #F28D35;
     }
-
+ #about{
+      background-color: #1a1a1a;
+      color: #F28D35;
+    }
 
 #hero {
   padding-top: 6rem;
@@ -309,6 +312,7 @@ section {
   font-size: 14px;
   color: #fefefe;
 }
+
 
 
 

@@ -91,7 +91,7 @@ header {
 nav {
   display: flex;
   gap: 1.5rem;
-  background-color: #F28D35;
+  background-color: #000000;
 }
 
 nav a {
@@ -358,6 +358,7 @@ section {
   font-size: 14px;
   color: #fefefe;
 }
+
 
 
 

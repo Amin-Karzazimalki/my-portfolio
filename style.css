@@ -1,7 +1,7 @@
 :root {
   --primary-color: #000000;
   --accent-color: #F28D35;
-  --text-color: #fefefe;
+  --text-color: #666666;
   --font-title: 'Playfair Display', serif;
   --font-body: 'Montserrat', sans-serif;
 }
@@ -132,11 +132,23 @@ section {
   text-align: center;
 }
 
-#hero, #projects, #skills, #contact {
+#hero, {
       background-color: #1a1a1a;
       color: #F28D35;
     }
  #about{
+      background-color: #1a1a1a;
+      color: #F28D35;
+    }
+#projects{
+      background-color: #1a1a1a;
+      color: #F28D35;
+    }
+ #skills{
+      background-color: #1a1a1a;
+      color: #F28D35;
+    }
+ #contact{
       background-color: #1a1a1a;
       color: #F28D35;
     }
@@ -358,6 +370,7 @@ section {
   font-size: 14px;
   color: #fefefe;
 }
+
 
 
 

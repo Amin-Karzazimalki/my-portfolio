@@ -12,16 +12,22 @@ const trailCount = 5;
 
     // Création des éléments trail
     for (let i = 0; i < trailCount; i++) {
-      const el = document.createElement('div');
-      el.className = 'trail';
-      el.style.width = `${6 + i * 4}px`;
-      el.style.height = el.style.width;
-      el.style.background = `rgba(200, 220, 255, ${0.9 - i * 0.18})`;
-      el.style.opacity = 0.9 - i * 0.18;
-      el.style.boxShadow = `0 0 ${10 + i * 6}px rgba(180, 200, 255, ${0.5 - i * 0.1})`;
-      document.body.appendChild(el);
-      trails.push(el);
-    }
+  const el = document.createElement('div');
+  el.className = 'trail';
+  el.style.width  = `${6 + i * 4}px`;
+  el.style.height = el.style.width;
+  
+  // Nouvelle couleur orange avec dégradé d’opacité
+  el.style.background = `rgba(var(--color-rgb), ${0.9 - i * 0.18})`;
+  
+  el.style.opacity = 0.9 - i * 0.18;
+  
+  // Ombre assortie à la couleur orange
+  el.style.boxShadow = `0 0 ${10 + i * 6}px rgba(var(--color-rgb), ${0.6 - i * 0.12})`;
+  
+  document.body.appendChild(el);
+  trails.push(el);
+}
 
     let mouseX = 0;
     let mouseY = 0;
@@ -58,15 +64,17 @@ const trailCount = 5;
 
     // Optionnel : grossit légèrement le premier cercle au hover
     document.querySelectorAll('a, button, .link').forEach(el => {
-      el.addEventListener('mouseenter', () => {
-        trails[0].style.transform = 'translate(-50%, -50%) scale(2.2)';
-        trails[0].style.background = 'rgba(255, 240, 200, 0.95)';
-      });
-      el.addEventListener('mouseleave', () => {
-        trails[0].style.transform = 'translate(-50%, -50%) scale(1)';
-        trails[0].style.background = 'rgba(200, 220, 255, 0.9)';
-      });
-    });
+  el.addEventListener('mouseenter', () => {
+    trails[0].style.transform   = 'translate(-50%, -50%) scale(2.2)';
+    trails[0].style.background  = '#F28D35';           // ← version pleine
+    // ou semi-transparent si tu préfères : 'rgba(242, 141, 53, 0.95)'
+  });
+  
+  el.addEventListener('mouseleave', () => {
+    trails[0].style.transform   = 'translate(-50%, -50%) scale(1)';
+    trails[0].style.background  = `rgba(var(--color-rgb), 0.9)`;  // retour à la normale
+  });
+});
 
 
 
@@ -102,6 +110,7 @@ function getRandomColor() {
   }
   return color;
 }
+
 
 
 

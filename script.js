@@ -6,55 +6,40 @@ function toggleMenu() {
 
 
 // --- Variables ---
-const cursor = document.getElementById('custom-cursor');
-let mouseX = 0;
-let mouseY = 0;
-let cursorX = 0;
-let cursorY = 0;
+ function animate() {
+      // Le premier suit directement
+      positions[0].x += (mouseX - positions[0].x) * 0.45;
+      positions[0].y += (mouseY - positions[0].y) * 0.45;
 
-const lag = 0.12;              // lag du curseur principal (ease-out naturel)
-const trailCount = 6;          // nombre de traînées (4–8 est subtil)
-const trailDelay = 40;         // délai entre chaque traînée (en ms, plus = trail plus long)
-const trails = [];             // tableau pour stocker les éléments trail
+      // Les suivants suivent le précédent avec délai croissant
+      for (let i = 1; i < trailCount; i++) {
+        const prev = positions[i - 1];
+        positions[i].x += (prev.x - positions[i].x) * (0.22 - i * 0.03);
+        positions[i].y += (prev.y - positions[i].y) * (0.22 - i * 0.03);
+      }
 
-// --- Création des trails une seule fois ---
-for (let i = 0; i < trailCount; i++) {
-  const trail = document.createElement('div');
-  trail.classList.add('cursor-trail');
-  document.body.appendChild(trail);
-  trails.push(trail);
-}
+      // Applique les positions
+      trails.forEach((el, i) => {
+        el.style.left = positions[i].x + 'px';
+        el.style.top  = positions[i].y + 'px';
+      });
 
-// --- Suivi de la souris ---
-document.addEventListener('mousemove', (e) => {
-  mouseX = e.clientX;
-  mouseY = e.clientY;
-});
+      requestAnimationFrame(animate);
+    }
 
-// --- Animation loop ---
-function animate() {
-  // Curseur principal (avec lag)
-  cursorX += (mouseX - cursorX) * lag;
-  cursorY += (mouseY - cursorY) * lag;
-  cursor.style.transform = `translate(${cursorX - 6}px, ${cursorY - 6}px)`;
+    animate();
 
-  // Trails : décalage progressif + fade
-  trails.forEach((trail, index) => {
-    const delayFactor = (index + 1) * trailDelay;
-    // On simule un décalage temporel en utilisant une interpolation plus lente
-    const delayedX = mouseX + (cursorX - mouseX) * (index * 0.15);
-    const delayedY = mouseY + (cursorY - mouseY) * (index * 0.15);
-
-    trail.style.transform = `translate(${delayedX - (trail.offsetWidth / 2)}px, ${delayedY - (trail.offsetHeight / 2)}px)`;
-    
-    // Opacité décroissante + fade out naturel
-    trail.style.opacity = (trailCount - index) / (trailCount * 2.5); // ex: 0.4 → 0.05
-  });
-
-  requestAnimationFrame(animate);
-}
-
-animate();
+    // Optionnel : grossit légèrement le premier cercle au hover
+    document.querySelectorAll('a, button, .link').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        trails[0].style.transform = 'translate(-50%, -50%) scale(2.2)';
+        trails[0].style.background = 'rgba(255, 240, 200, 0.95)';
+      });
+      el.addEventListener('mouseleave', () => {
+        trails[0].style.transform = 'translate(-50%, -50%) scale(1)';
+        trails[0].style.background = 'rgba(200, 220, 255, 0.9)';
+      });
+    });
 
 
 
@@ -90,6 +75,7 @@ function getRandomColor() {
   }
   return color;
 }
+
 
 
 

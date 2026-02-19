@@ -14,40 +14,51 @@
 
 
 
-#custom-cursor {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background-color: #F28D35;
-  pointer-events: none;
-  z-index: 9999;
-  transition: transform 0.12s ease-out, width 0.25s ease-out, height 0.25s ease-out;
-  mix-blend-mode: difference; /* ou exclusion si tu préfères moins contrasté */
-  box-shadow: 0 0 12px rgba(242, 141, 53, 0.4);
-}
 
-/* Classe pour les éléments du trail */
-.cursor-trail {
-  position: fixed;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: #F28D35;
-  pointer-events: none;
-  z-index: 9998; /* juste en dessous du curseur principal */
-  opacity: 0;
-  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
-  box-shadow: 0 0 10px rgba(242, 141, 53, 0.3);
-}
 
-/* Variantes pour plus de profondeur (optionnel) */
-.cursor-trail:nth-child(2) { width: 9px; height: 9px; }
-.cursor-trail:nth-child(3) { width: 8px; height: 8px; opacity: 0.35; }
-.cursor-trail:nth-child(4) { width: 7px; height: 7px; opacity: 0.25; }
-.cursor-trail:nth-child(5) { width: 6px; height: 6px; opacity: 0.15; }
+ .trail {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      will-change: transform, opacity;
+    }
+
+    /* Génère les cercles du trail dynamiquement via JS */
+    .content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      text-align: center;
+      font-family: system-ui, sans-serif;
+    }
+
+    .link {
+      font-size: 5.5rem;
+      color: #ddd;
+      text-decoration: none;
+      display: block;
+      margin: 2rem 0;
+      transition: color 0.4s;
+    }
+
+    .link:hover {
+      color: #fff;
+    }
+
+    @media (hover: none) {
+      .trail { display: none; }
+      * { cursor: default !important; }
+    }
+
+
+
+
+
+
 
 
 
@@ -370,6 +381,7 @@ section {
   font-size: 14px;
   color: #fefefe;
 }
+
 
 
 

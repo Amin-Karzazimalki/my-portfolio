@@ -4,6 +4,8 @@
   --text-color: #666666;
   --font-title: 'Playfair Display', serif;
   --font-body: 'Montserrat', sans-serif;
+  /* Tu peux aussi ajouter celles-ci si tu veux (optionnel) */
+  --accent-rgb: 242, 141, 53;    /* pour les rgba() */
 }
 
 * {
@@ -381,6 +383,7 @@ section {
   font-size: 14px;
   color: #fefefe;
 }
+
 
 
 
